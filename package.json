@@ -1,0 +1,22 @@
+{
+  "name": "registrytest",
+  "version": "0.0.1",
+  "description": "Registry test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsala-it/RegistryTest.git"
+  },
+  "author": "Adama DIENG <adama.dieng@digitastuces.com> (http://digitastuces.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dsala-it/RegistryTest/issues"
+  },
+  "homepage": "https://github.com/dsala-it/RegistryTest#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
