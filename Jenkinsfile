@@ -30,8 +30,12 @@ pipeline {
         }
         
         stage('Test Docker image') {
-            dockerImage.inside {
-                sh 'echo "Tests passed"'
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh 'echo "Tests passed"'
+                    }
+                }
             }
         }
 
