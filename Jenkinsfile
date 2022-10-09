@@ -38,9 +38,9 @@ pipeline {
             //     }
             // }
 
-            stage("Image Prune"){
-                imagePrune(CONTAINER_NAME)
-            }
+            // stage("Image Prune"){
+            //     imagePrune(CONTAINER_NAME)
+            // }
 
             stage('Deploying Docker Image to Dockerhub') {
                 steps {
