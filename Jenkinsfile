@@ -1,53 +1,20 @@
 pipeline {
-    environment {
-        registry = "docker.digitastuces.com"
-        registryCredential = 'jennexus-cicd'
-        dockerImage = ''
-    }
-
     agent any
-
     stages {
-        stage('Checkout') {
-            // git credentialsId: 'dsala-it-github', url: 'https://github.com/dsala-it/RegistryTest'
+        stage('build') {
             steps {
-                git branch: 'master',
-                    credentialsId: 'dsala-it-github',
-                    url: 'https://github.com/dsala-it/RegistryTest'
-
-                sh "ls -lat"
+                echo 'Hello world, this is multibranch pipeline for Dev branch'
             }
         }
-
-        stage('Building Docker Image') {
+        stage('test') {
             steps {
-                script {
-                    docker.withRegistry(registry, registryCredential) {
-                        //dockerImage = docker.build(registry + "/node:$BUILD_NUMBER")
-                        dockerImage = docker.build("docker.digitastuces.com/node:latest")
-                    }
-                }
+                echo 'testing Dev...'
             }
         }
-        
-        stage('Test Docker image') {
+        stage('deploy') {
             steps {
-                script {
-                    dockerImage.inside {
-                        sh 'echo "Tests passed"'
-                    }
-                }
-            }
-        }
-
-        stage('Deploying Docker Image to Nexus') {
-            steps {
-                script {
-                    docker.withRegistry(registry, registryCredential) {
-                        dockerImage.push()
-                    }
-                }
+                echo 'deploying Dev...'
             }
         }
     }
-}
+}    
