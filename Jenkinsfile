@@ -24,7 +24,7 @@ pipeline {
             stage('Building Docker Image') {
                 steps {
                     script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        dockerImage = docker.build registry + "/jenkins/" + CONTAINER_NAME +":$BUILD_NUMBER"
                     }
                 }
             }
@@ -49,12 +49,6 @@ pipeline {
                         dockerImage.push()
                         }
                     }
-                }
-            }
-
-            stage('Cleaning Up') {
-                steps{
-                  sh "docker rmi --force $registry:$BUILD_NUMBER"
                 }
             }
         }
