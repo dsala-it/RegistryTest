@@ -24,29 +24,18 @@ pipeline {
             stage('Building Docker Image') {
                 steps {
                     script {
-                        dockerImage = docker.build registry + "/jenkins/" + CONTAINER_NAME +":$BUILD_NUMBER"
+                        docker.withRegistry(registry, registryCredential) {
+                            dockerImage = docker.build registry + "/jenkins/" + CONTAINER_NAME +":$BUILD_NUMBER"
+                        }
                     }
                 }
             }
 
-            // stage('Sonar'){
-            //     try {
-            //         //sh "mvn sonar:sonar"
-            //         sh "echo 'Quality'"
-            //     } catch(error){
-            //         echo "The sonar server could not be reached ${error}"
-            //     }
-            // }
-
-            // stage("Image Prune"){
-            //     imagePrune(CONTAINER_NAME)
-            // }
-
-            stage('Deploying Docker Image to Dockerhub') {
+            stage('Deploying Docker Image to Nexus') {
                 steps {
                     script {
                         docker.withRegistry(registry, registryCredential) {
-                        dockerImage.push()
+                            dockerImage.push()
                         }
                     }
                 }
