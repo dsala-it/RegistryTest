@@ -23,7 +23,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry(registry, registryCredential) {
-                        dockerImage = docker.build(registry + "/jenkins/node:$BUILD_NUMBER")
+                        //dockerImage = docker.build(registry + "/node:$BUILD_NUMBER")
+                        dockerImage = docker.build("docker.digitastuces.com/node:latest")
                     }
                 }
             }
